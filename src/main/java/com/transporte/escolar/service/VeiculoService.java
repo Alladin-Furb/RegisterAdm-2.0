@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import javax.management.InvalidAttributeValueException;
-
 @Service
 public class VeiculoService {
 
@@ -28,17 +26,13 @@ public class VeiculoService {
     }
 
     public Veiculo salvar(Veiculo veiculo) {
-
         if (veiculo.getCapacidade() <= 0) {
-            throw new InvalidAttributeValueException(
-                    "Capacidade deve ser maior que zero");
+            throw new RuntimeException("Capacidade deve ser maior que zero");
         }
-
         return repository.save(veiculo);
     }
 
     public Veiculo atualizar(Long id, Veiculo dados) {
-
         Veiculo veiculo = buscarPorId(id);
 
         veiculo.setPlaca(dados.getPlaca());

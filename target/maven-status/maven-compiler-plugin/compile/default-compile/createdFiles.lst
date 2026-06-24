@@ -7,11 +7,9 @@ com\transporte\escolar\controller\VeiculoController.class
 com\transporte\escolar\model\Aluno.class
 com\transporte\escolar\controller\AdminController.class
 com\transporte\escolar\repository\MotoristaRepository.class
-com\transporte\escolar\service\ElectionService.class
 com\transporte\escolar\controller\AlunoController.class
 com\transporte\escolar\service\MotoristaService.class
 com\transporte\escolar\controller\MotoristaController.class
 com\transporte\escolar\model\Motorista.class
 com\transporte\escolar\repository\VeiculoRepository.class
 com\transporte\escolar\TransporteEscolarApplication.class
-com\transporte\escolar\controller\ElectionController.class
