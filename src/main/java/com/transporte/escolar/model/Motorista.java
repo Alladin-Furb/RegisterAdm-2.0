@@ -2,12 +2,14 @@ package com.transporte.escolar.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 public class Motorista {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String nome;
 
@@ -17,7 +19,7 @@ public class Motorista {
     public Motorista() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

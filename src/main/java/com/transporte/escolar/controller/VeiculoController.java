@@ -2,9 +2,11 @@ package com.transporte.escolar.controller;
 
 import com.transporte.escolar.model.Veiculo;
 import com.transporte.escolar.service.VeiculoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -22,23 +24,23 @@ public class VeiculoController {
     }
 
     @GetMapping("/{id}")
-    public Veiculo buscarPorId(@PathVariable Long id) {
+    public Veiculo buscarPorId(@PathVariable UUID id) {
         return service.buscarPorId(id);
     }
 
     @PostMapping
-    public Veiculo criar(@RequestBody Veiculo veiculo) { 
+    public Veiculo criar(@Valid @RequestBody Veiculo veiculo) { 
         return service.salvar(veiculo);
     }
 
     @PutMapping("/{id}")
-    public Veiculo atualizar(@PathVariable Long id,
-                             @RequestBody Veiculo veiculo) {
+    public Veiculo atualizar(@PathVariable UUID id,
+                             @Valid @RequestBody Veiculo veiculo) {
         return service.atualizar(id, veiculo);
     }
 
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long id) {
+    public void remover(@PathVariable UUID id) {
         service.remover(id);
     }
 }

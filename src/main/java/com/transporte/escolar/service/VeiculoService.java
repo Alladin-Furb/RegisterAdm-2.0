@@ -5,6 +5,7 @@ import com.transporte.escolar.repository.VeiculoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VeiculoService {
@@ -19,7 +20,7 @@ public class VeiculoService {
         return repository.findAll();
     }
 
-    public Veiculo buscarPorId(Long id) {
+    public Veiculo buscarPorId(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Veículo não encontrado"));
@@ -32,7 +33,7 @@ public class VeiculoService {
         return repository.save(veiculo);
     }
 
-    public Veiculo atualizar(Long id, Veiculo dados) {
+    public Veiculo atualizar(UUID id, Veiculo dados) {
         Veiculo veiculo = buscarPorId(id);
 
         veiculo.setPlaca(dados.getPlaca());
@@ -42,7 +43,7 @@ public class VeiculoService {
         return repository.save(veiculo);
     }
 
-    public void remover(Long id) {
+    public void remover(UUID id) {
         repository.deleteById(id);
     }
 }
