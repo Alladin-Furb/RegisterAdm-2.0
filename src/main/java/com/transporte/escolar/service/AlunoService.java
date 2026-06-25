@@ -1,5 +1,6 @@
 package com.transporte.escolar.service;
 
+import com.transporte.escolar.config.AlunoEventProducer;
 import com.transporte.escolar.model.Aluno;
 import com.transporte.escolar.repository.AlunoRepository;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,11 @@ import java.util.List;
 public class AlunoService {
 
     private final AlunoRepository repository;
+    private final AlunoEventProducer alunoEventProducer;
 
-    public AlunoService(AlunoRepository repository) {
+    public AlunoService(AlunoRepository repository, AlunoEventProducer alunoEventProducer) {
         this.repository = repository;
+        this.alunoEventProducer = alunoEventProducer;
     }
 
     public List<Aluno> listar() {
@@ -26,11 +29,12 @@ public class AlunoService {
     }
 
     public Aluno salvar(Aluno aluno) {
-        return repository.save(aluno);
+        Aluno salvo = repository.save(aluno);
+        alunoEventProducer.publicarAlunoCadastrado(salvo);
+        return salvo;
     }
 
     public Aluno atualizar(Long id, Aluno dados) {
-
         Aluno aluno = buscarPorId(id);
 
         aluno.setNome(dados.getNome());
@@ -39,7 +43,9 @@ public class AlunoService {
         aluno.setEndereco(dados.getEndereco());
         aluno.setConfirmouPresenca(dados.isConfirmouPresenca());
 
-        return repository.save(aluno);
+        Aluno atualizado = repository.save(aluno);
+        alunoEventProducer.publicarAlunoAtualizado(atualizado);
+        return atualizado;
     }
 
     public void remover(Long id) {
