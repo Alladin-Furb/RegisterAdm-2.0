@@ -5,6 +5,7 @@ import com.transporte.escolar.service.AlunoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/alunos")
@@ -22,7 +23,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public Aluno buscarPorId(@PathVariable Long id) {
+    public Aluno buscarPorId(@PathVariable UUID id) {
         return service.buscarPorId(id);
     }
 
@@ -32,13 +33,13 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public Aluno atualizar(@PathVariable Long id,
+    public Aluno atualizar(@PathVariable UUID id,
                            @RequestBody Aluno aluno) {
         return service.atualizar(id, aluno);
     }
 
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long id) {
+    public void remover(@PathVariable UUID id) {
         service.remover(id);
     }
 }

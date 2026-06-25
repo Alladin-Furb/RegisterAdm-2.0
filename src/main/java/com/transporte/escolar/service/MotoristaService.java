@@ -5,6 +5,7 @@ import com.transporte.escolar.repository.MotoristaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MotoristaService {
@@ -19,7 +20,7 @@ public class MotoristaService {
         return repository.findAll();
     }
 
-    public Motorista buscarPorId(Long id) {
+    public Motorista buscarPorId(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Motorista não encontrado"));
@@ -29,7 +30,7 @@ public class MotoristaService {
         return repository.save(motorista);
     }
 
-    public Motorista atualizar(Long id, Motorista dados) {
+    public Motorista atualizar(UUID id, Motorista dados) {
 
         Motorista motorista = buscarPorId(id);
 
@@ -40,7 +41,7 @@ public class MotoristaService {
         return repository.save(motorista);
     }
 
-    public void remover(Long id) {
+    public void remover(UUID id) {
         repository.deleteById(id);
     }
 }

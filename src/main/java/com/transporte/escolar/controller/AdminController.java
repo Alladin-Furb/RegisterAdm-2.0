@@ -4,6 +4,7 @@ import com.transporte.escolar.model.Aluno;
 import com.transporte.escolar.model.Motorista;
 import com.transporte.escolar.model.Veiculo;
 import com.transporte.escolar.service.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class AdminController {
     }
 
     @PostMapping("/veiculos")
-    public Veiculo cadastrarVeiculo(@RequestBody Veiculo veiculo) {
+    public Veiculo cadastrarVeiculo(@Valid @RequestBody Veiculo veiculo) {
         return service.salvarVeiculo(veiculo);
     }
 

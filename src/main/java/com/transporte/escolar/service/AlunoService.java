@@ -6,6 +6,7 @@ import com.transporte.escolar.repository.AlunoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AlunoService {
@@ -22,7 +23,7 @@ public class AlunoService {
         return repository.findAll();
     }
 
-    public Aluno buscarPorId(Long id) {
+    public Aluno buscarPorId(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Aluno não encontrado"));
@@ -34,13 +35,19 @@ public class AlunoService {
         return salvo;
     }
 
-    public Aluno atualizar(Long id, Aluno dados) {
+    public Aluno atualizar(UUID id, Aluno dados) {
         Aluno aluno = buscarPorId(id);
 
         aluno.setNome(dados.getNome());
         aluno.setMatricula(dados.getMatricula());
+        aluno.setCpf(dados.getCpf());
         aluno.setTelefone(dados.getTelefone());
         aluno.setEndereco(dados.getEndereco());
+        aluno.setEmail(dados.getEmail());
+        aluno.setRotaTransporte(dados.getRotaTransporte());
+        aluno.setCursoId(dados.getCursoId());
+        aluno.setNomeCurso(dados.getNomeCurso());
+        aluno.setFaculdade(dados.getFaculdade());
         aluno.setConfirmouPresenca(dados.isConfirmouPresenca());
 
         Aluno atualizado = repository.save(aluno);
@@ -48,7 +55,7 @@ public class AlunoService {
         return atualizado;
     }
 
-    public void remover(Long id) {
+    public void remover(UUID id) {
         repository.deleteById(id);
     }
 }
